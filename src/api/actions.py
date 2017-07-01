@@ -85,3 +85,58 @@ def list_endpoints():
                                          auth=(user, password)).text)
         return result
     return _connect(connect_callback)
+
+def turnon(machine_id):
+    """Turn machine on"""
+    def connect_callback():
+        """Helper callback that do not deal with any kind of errors that might be raised"""
+        user = current_user.username
+        password = current_user.password
+        result = json.loads(requests.patch(API_ADDRESS+'/endpoint/turnon/'+machine_id,
+                                           auth=(user, password)).text)
+        return result
+    return _connect(connect_callback)
+
+def turnoff(machine_id):
+    """Turn machine off"""
+    def connect_callback():
+        """Helper callback that do not deal with any kind of errors that might be raised"""
+        user = current_user.username
+        password = current_user.password
+        result = json.loads(requests.patch(API_ADDRESS+'/endpoint/turnoff/'+machine_id,
+                                           auth=(user, password)).text)
+        return result
+    return _connect(connect_callback)
+
+def remove(machine_id):
+    """Remove endpoint"""
+    def connect_callback():
+        """Helper callback that do not deal with any kind of errors that might be raised"""
+        user = current_user.username
+        password = current_user.password
+        result = json.loads(requests.delete(API_ADDRESS+'/endpoint/remove/'+machine_id,
+                                            auth=(user, password)).text)
+        return result
+    return _connect(connect_callback)
+
+def edit(form):
+    """Edit endpoint"""
+    def connect_callback():
+        """Helper callback that do not deal with any kind of errors that might be raised"""
+        user = current_user.username
+        password = current_user.password
+        f_data = {
+            "model": form["model"],
+            "serialNumber": form["serialNumber"],
+            "name": form["name"],
+            "processor": form["processor"],
+            "memory": form["memory"],
+            "hd": form["hd"],
+            "user": user,
+            "id": form["id"]
+        }
+        result = json.loads(requests.patch(API_ADDRESS+'/endpoint/modify',
+                                           auth=(user, password),
+                                           json=f_data).text)
+        return result
+    return _connect(connect_callback)

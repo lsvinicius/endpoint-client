@@ -1,4 +1,45 @@
 $(document).ready(function() {
+
+    function power(power_state, id) {
+        var endpoint_action = "";
+        if(power_state === "Off") {
+            endpoint_action = "/turnon";
+        } else if(power_state === "On") {
+            endpoint_action = "/turnoff";
+        }
+        console.log(endpoint_action);
+        $.ajax({
+            url: endpoint_action,
+            type: 'post',
+            dataType: 'json',
+            data: {"id":id},
+            success: function(data) {
+                console.log(data.message);
+            }
+        });
+    }
+
+    function remove(id) {
+
+    }
+
+    //handle endpoint actions
+    $(document.body).on('click', '.endpoint-action', function() {
+        var split = $(this).attr('id').split("_");
+        var action = split[0];
+        var id = split[1];
+        var power_state = $(this).text();
+        if(action !== 'edit') {
+            $(this).button('loading')
+        }
+        if(action === 'edit') {
+            edit(id);
+        } else if(action === 'power') {
+            power(power_state, id);
+        } else if(action === 'remove') {
+            remove(id);
+        }
+    });
     //register new endpoint
     $("#create").click(function() {
         console.log("fui clicado");
@@ -28,9 +69,10 @@ $(document).ready(function() {
         });
     });
 
-    function draw_disabled_row(item) {
+    function draw_row(item) {
         var power = item.on ? "On" : "Off";
         var color = "#f2f4ed";
+        var disabled = item.disabled ? "disabled" : "";
         return '<tr bgcolor="'+color+'">\n' +
                     '<td>'+item.model+'</td>\n' +
                     '<td>'+item.serialNumber+'</td>\n' +
@@ -41,22 +83,21 @@ $(document).ready(function() {
                     '<td>'+item.celsiusDegrees+'</td>\n' +
                     '<td>'+item.user+'</td>\n' +
                     '<td>\n'+
-                        '<button type="button" class="btn btn-md" id="power_'+item.id+'"'+
-                        ' disabled>' + power + '</button>' +
+                        '<button type="button" data-loading-text="<i class=\'fa fa-circle-o-notch fa-spin\'></i>"'+
+                        'class="btn btn-md endpoint-action" id="power_'+item.id+'"'+
+                        disabled+'>' + power + '</button>' +
                     '</td>\n'+
                     '<td>'+
-                        '<button type="button" class="btn btn-md" id="edit_'+item.id+'"'+
-                        ' disabled>Edit</button>' +
+                        '<button type="button"'+
+                        'class="btn btn-md endpoint-action" id="edit_'+item.id+'"'+
+                        disabled+'>Edit</button>' +
                     '</td>\n' +
                     '<td>' +
-                        '<button type="button" class="btn btn-md remove" id="remove_'+item.id+'"'+
-                        ' disabled>X</button>' +
+                        '<button type="button" data-loading-text="<i class=\'fa fa-circle-o-notch fa-spin\'></i>"'+
+                        'class="btn btn-md remove endpoint-action" id="remove_'+item.id+'"'+
+                        disabled+'>X</button>' +
                     '</td>\n' +
                 '</tr>';
-    }
-
-    function draw_enabled_row(item) {
-        return '';
     }
 
     //draw table
@@ -68,7 +109,7 @@ $(document).ready(function() {
                 console.log(data);
                 var data_rows = "";
                 data.endpoints.forEach(function(item, index) {
-                    data_rows += item.disabled ? draw_disabled_row(item) : draw_enabled_row(item);
+                    data_rows += draw_row(item);
                 });
                 var table_content = 
                     '<div class="panel panel-default">'+
@@ -100,7 +141,6 @@ $(document).ready(function() {
                         '</table>'+
                         '</div>'+
                     '</div>';
-                console.log(table_content);
                 $("#machines_table").html(table_content);
             }
         });
@@ -112,12 +152,3 @@ $(document).ready(function() {
         draw_table();
     }, 5000);
 });
-
-/*        <div class="col-sm-4">
-            <div class="list-group">
-                <div class="list-group-item">
-                </div>
-            </div>
-        </div>
-
-*/

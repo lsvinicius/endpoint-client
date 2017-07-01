@@ -74,3 +74,27 @@ def create_endpoint():
 def list_endpoints():
     """List all endpoints. No account distinction is made"""
     return jsonify(actions.list_endpoints())
+
+@site_views.route('/turnon', methods=['POST'])
+@login_required
+def turnon():
+    """Turn on an endpoint"""
+    return jsonify(actions.turnon(request.form['id']))
+
+@site_views.route('/turnoff', methods=['POST'])
+@login_required
+def turnoff():
+    """Turn off an endpoint"""
+    return jsonify(actions.turnoff(request.form['id']))
+
+@site_views.route('/edit', methods=['POST'])
+@login_required
+def edit():
+    """Edit endpoint"""
+    return jsonify(actions.edit(request.form))
+
+@site_views.route('/remove', methods=['POST'])
+@login_required
+def remove():
+    """Remove endpoint"""
+    return jsonify(actions.remove(request.form['id']))
