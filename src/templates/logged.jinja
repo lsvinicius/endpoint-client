@@ -14,7 +14,7 @@
     </div>
 </div>
 <!-- Modal register-->
-<div class="modal fade" id="addMachine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addEndpoint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,32 +22,32 @@
         <h4 class="modal-title">Add new machine</h4>
       </div>
       <div class="modal-body">
-                    <div id="register_endpoint">
-                        <fieldset>
-                            <form id="register_endpoint_form" class="input-group">
-                                <div class="form-group">
-                                    <label class="control-label" >Model: </label>
-                                    <input type="text" id="model"/>
-                                    <label class="control-label" >Serial Number: </label>
-                                    <input type="text" id="serialNumber"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Name: </label>
-                                    <input type="text" id="name"/>
-                                    <label class="control-label">Processor: </label>
-                                    <input type="text" id="processor"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Memory (GB): </label>
-                                    <input type="text" id="memory"/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">HD (GB): </label>
-                                    <input type="text" id="hd"/>
-                                </div>
-                            </form>
-                        </fieldset>
-                    <div id="form_submit_result"></div>
+            <div id="register_endpoint">
+                <fieldset>
+                    <form id="register_endpoint_form" class="input-group">
+                        <div class="form-group">
+                            <label class="control-label" >Model: </label>
+                            <input type="text" id="model"/>
+                            <label class="control-label" >Serial Number: </label>
+                            <input type="text" id="serialNumber"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Name: </label>
+                            <input type="text" id="name"/>
+                            <label class="control-label">Processor: </label>
+                            <input type="text" id="processor"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Memory (GB): </label>
+                            <input type="text" id="memory"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">HD (GB): </label>
+                            <input type="text" id="hd"/>
+                        </div>
+                    </form>
+                </fieldset>
+            <div id="form_submit_result"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -55,22 +55,4 @@
       </div>
     </div>
   </div>
-
-<!-- Modal edit machines-->
-<div class="modal fade" id="editMachine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit machine</h4>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="edit">Edit</button>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}

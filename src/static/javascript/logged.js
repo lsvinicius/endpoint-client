@@ -7,7 +7,6 @@ $(document).ready(function() {
         } else if(power_state === "On") {
             endpoint_action = "/turnoff";
         }
-        console.log(endpoint_action);
         $.ajax({
             url: endpoint_action,
             type: 'post',
@@ -20,7 +19,48 @@ $(document).ready(function() {
     }
 
     function remove(id) {
+        $.ajax({
+            url: '/remove',
+            type: 'post',
+            dataType: 'json',
+            data: {"id":id},
+            success: function(data) {
+                console.log(data.message);
+            }
+        });
+    }
 
+    function save_edit(id) {
+        var form_data = {
+            "model": $("#edit_model").val(),
+            "serialNumber": $("#edit_serialNumber").val(),
+            "name": $("#edit_name").val(),
+            "processor": $("#edit_processor").val(),
+            "memory": $("#edit_memory").val(),
+            "hd": $("#edit_hd").val(),
+            "id": id
+        };
+        $.ajax({
+            url: '/edit',
+            type: 'post',
+            dataType: 'json',
+            data: form_data,
+            success: function(data) {
+                var classType = data.success ? "alert alert-success fade in alert-dismissable" : 
+                                               "alert alert-danger fade in alert-dismissable";
+                $("#form_submit_result_edit").html(
+                    '<div class="'+classType+'">'+
+                        '<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>'+
+                        data.message +
+                    '</div>');
+            }
+        });
+    }
+
+    function edit(id) {
+         $("#edit_endpoint").html(
+             "<p>oi</p>"
+         );
     }
 
     //handle endpoint actions
@@ -42,7 +82,6 @@ $(document).ready(function() {
     });
     //register new endpoint
     $("#create").click(function() {
-        console.log("fui clicado");
         var form_data = {
             "model": $("#model").val(),
             "serialNumber": $("#serialNumber").val(),
@@ -89,7 +128,7 @@ $(document).ready(function() {
                     '</td>\n'+
                     '<td>'+
                         '<button type="button"'+
-                        'class="btn btn-md endpoint-action" id="edit_'+item.id+'"'+
+                        'class="btn btn-md endpoint-action" data-toggle="collapse" id="edit_'+item.id+'"'+
                         disabled+'>Edit</button>' +
                     '</td>\n' +
                     '<td>' +
@@ -116,9 +155,11 @@ $(document).ready(function() {
                         '<div class="panel-heading">'+
                             '<h3>We have '+data.endpoints.length+' registered machines</h3>'+
                             '<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"'+
-                                    'data-target="#addMachine">' +
+                                    'data-target="#addEndpoint">' +
                                 'Do you want to add one ?'+
                             '</button>'+
+                            '<div id="edit_endpoint">' +
+                            '</div>' +
                         '</div>'+
                         '<div class="table-responsive">' +
                         '<table class = "table table-fixed">' +
