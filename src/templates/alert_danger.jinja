@@ -1,0 +1,6 @@
+{% if msg and not success %}
+    <div class="alert alert-danger fade in alert-dismissable flash">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+        {{msg}}
+    </div>
+{% endif %}

@@ -5,13 +5,34 @@ import requests
 from src.config import API_ADDRESS
 from flask_login import current_user
 
+def _check_result(result):
+    if not result.get('success'):
+        result['success'] = False
+
 def _connect(connect_callback):
+    """Function to handle laborious connection tasks"""
     try:
         result = connect_callback()
+        if result is None:
+            result = {}
+            result['message'] = "something went wrong"
         _check_result(result)
         return result
+    except requests.exceptions.ConnectionError as exception:
+        print(exception)
+        return {"success": False, "message": "Connection to external API failed"}
+    except requests.exceptions.Timeout as exception:
+        print(exception)
+        return {"success": False, "message": "Operation timedout"}
+    except requests.exceptions.TooManyRedirects as exception:
+        print(exception)
+        return {"success": False, "message": "Too many redirects"}
+    except requests.exceptions.HTTPError as exception:
+        print(exception)
+        return {"success": False, "message": "Invalid HTTP response"}
     except requests.exceptions.RequestException as exception:
         print(exception)
+        return {"success": False, "message": "I don't know what happened"}
 
 def register(form):
     """Call register operation in external API"""
@@ -64,7 +85,3 @@ def list_endpoints():
                                          auth=(user, password)).text)
         return result
     return _connect(connect_callback)
-
-def _check_result(result):
-    if not result.get('success'):
-        result['success'] = False

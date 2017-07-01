@@ -25,9 +25,11 @@ def register():
     else:
         result = actions.register(request.form)
         if result['success']:
-            return render_template('index.jinja', msg=result['message'])
+            return render_template('index.jinja', msg=result['message'], success=result['success'])
         else:
-            return render_template('register.jinja', msg=result['message'])
+            print("HERE"+str(result['success']))
+            return render_template('register.jinja', msg=result['message'],
+                                   success=result['success'])
 
 @site_views.route('/login', methods=['GET', 'POST'])
 def login():
@@ -41,7 +43,7 @@ def login():
             login_user(user)
             return redirect(url_for('site_views.logged'))
         else:
-            return render_template('login.jinja', msg=result['message'])
+            return render_template('login.jinja', msg=result['message'], succes=result['success'])
 
 @site_views.route('/logged', methods=['GET'])
 @login_required
