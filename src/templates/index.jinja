@@ -1,0 +1,13 @@
+{% extends 'base.jinja' %}
+{% block content %}
+    <div id="content">
+        <p>Connecting you to the <strong class="cloud">
+        CLOUD
+        </strong></p>
+        <ul>
+            <li><a href='/register'>Register</a></li>
+            <li><a href='/login'>Log in</a></li>
+        </ul>
+    </div>
+    <p class="success">{{msg}}</p>
+{% endblock %}

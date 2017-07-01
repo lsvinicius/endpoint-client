@@ -1,0 +1,13 @@
+{% extends 'base.jinja' %}
+{% block content %}
+    <form action="/register" method="POST">
+        Username: <br>
+        <input name="username"/> <br>
+        Password: <br>
+        <input type="password" name="password"> <br>
+        <input name="submit" type="submit" value="Register"/>
+    </form>
+    <p>Yes, it only takes that to register, we are very discrete 
+    and you better do not forget your username/password :)</p>
+    <p class="error">{{msg}}</p>
+{% endblock %}

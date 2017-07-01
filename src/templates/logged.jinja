@@ -1,0 +1,49 @@
+{% extends 'base.jinja' %}
+{% block scripts %}
+    <script src="static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="static/javascript/logged.js"></script>
+{% endblock %}
+{% block content %}
+    <div id="left_menu">
+        <p>Welcome {{ user.username }}</p>
+        <ul>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+        <div id="register_endpoint">
+            <p>Add new machine</p>
+            <form id="register_endpoint_form">
+                <table>
+                    <tr>
+                        <td>Model:</td>
+                        <td><input type="text" id="model"/></td>
+                    </tr>
+                    <tr>
+                        <td>SerialNumber:</td>
+                        <td><input type="text" id="serialNumber"/></td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" id="name"/></td>
+                    </tr>
+                    <tr>
+                        <td>Processor:</td>
+                        <td><input type="text" id="processor"/></td>
+                    </tr>
+                    <tr>
+                        <td>Memory (GB):</td>
+                        <td><input type="text" id="memory"/></td>
+                    </tr>
+                    <tr>
+                        <td>HD (GB):</td>
+                        <td><input type="text" id="hd"/></td>
+                    </tr>
+                </table>
+                <p><input type="button" value="Create" id="create"/></p>
+            </form>
+            <p id="form_submit_result"></p>
+        </div>
+    </div>
+    <div id="machines_list">
+
+    </div>
+{% endblock %}

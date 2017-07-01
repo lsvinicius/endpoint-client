@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        {% block scripts %}
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css">
+	</head>
+
+	<body>
+		<h1><a href="/">Endpoint Manager</a></h1>
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>
