@@ -159,36 +159,36 @@ $(document).ready(function() {
 
         return '<tr bgcolor="'+color+'" class="item-row" id="row_'+item.id+'">\n' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                             item.model+
                     '" disabled/>'+
                     '</td>\n' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                             item.serialNumber+
                     '" disabled/>'+
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.name+
                     '" disabled/>' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.processor+
                     '" disabled/>' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.memory+
                     '" disabled/>' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.hd+
                     '" disabled/>' +
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.celsiusDegrees+
                     '" disabled/>'+
                     '<td>'+
-                        '<input type="text" class="input-cell form-control" value="'+
+                        '<input type="text" maxlength="50" class="input-cell form-control" value="'+
                         item.user+
                     '" disabled/>' +
                     '<td>\n'+
